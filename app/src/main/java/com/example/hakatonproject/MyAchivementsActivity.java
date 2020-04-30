@@ -1,15 +1,14 @@
 package com.example.hakatonproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-public class MyAchivementsActivity extends AppCompatActivity {
+public class MyAchivementsActivity extends AppCompatActivity implements View.OnClickListener {
     private String NewAchivement, ImpStr, OfcStr;
     private boolean Imp, Ofc;
     TextView Ach;
@@ -31,10 +30,21 @@ public class MyAchivementsActivity extends AppCompatActivity {
         OfcStr = Ofc ? "Оффициальное" : "Неофициальное";
         String Achivements = SP.getString("Achivements", "");
         if( NewAchivement != null){
-            Achivements += "•" + NewAchivement + "\n - " + ImpStr + ", " + OfcStr + "\n";
+            Achivements += "•" + NewAchivement + "\n - " + ImpStr + ", " + OfcStr + "\n\n";
             editor.putString( "Achivements", Achivements );
             editor.apply();
         }
         Ach.setText( Achivements );
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }
